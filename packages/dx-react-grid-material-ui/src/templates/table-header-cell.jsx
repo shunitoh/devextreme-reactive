@@ -139,6 +139,7 @@ class TableHeaderCellBase extends React.PureComponent {
             columnTitle={columnTitle}
             onClick={this.onClick}
             getMessage={getMessage}
+            hint={column.hint ? column.hint : null}
             disabled={!sortingEnabled}
           />
         ) : (
