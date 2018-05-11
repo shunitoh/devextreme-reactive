@@ -1,21 +1,6 @@
 import { easeOutCubic } from '@devexpress/dx-core';
 import { getTargetColumnGeometries } from './column-geometries';
 
-export const getTableRowColumnsWithColSpan = (tableColumns, colSpanStart) => {
-  if (colSpanStart === undefined) return tableColumns;
-
-  let span = false;
-  return tableColumns
-    .reduce((acc, tableColumn, columnIndex) => {
-      if (span) return acc;
-      if (columnIndex === colSpanStart || tableColumn.key === colSpanStart) {
-        span = true;
-        return [...acc, { ...tableColumn, colSpan: tableColumns.length - columnIndex }];
-      }
-      return [...acc, tableColumn];
-    }, []);
-};
-
 export const getTableColumnGeometries = (columns, tableWidth) => {
   const columnWidths = columns
     .map(column => column.width);
@@ -55,6 +40,10 @@ export const getAnimations = (
   tableWidth,
   prevAnimations,
 ) => {
+  if (prevColumns.map(c => c.key).join('') === nextColumns.map(c => c.key).join('')) {
+    return new Map();
+  }
+
   const prevColumnGeometries = new Map(getTableColumnGeometries(prevColumns, tableWidth)
     .map((geometry, index) => [prevColumns[index].key, geometry])
     .map(([key, geometry]) => {

@@ -11,6 +11,9 @@ import {
 
 import { ProgressBarCell } from '../../../theme-sources/<%&themeName%>/components/progress-bar-cell';
 import { HighlightedCell } from '../../../theme-sources/<%&themeName%>/components/highlighted-cell';
+import { CurrencyTypeProvider } from '../../../theme-sources/<%&themeName%>/components/currency-type-provider';
+import { PercentTypeProvider } from '../../../theme-sources/<%&themeName%>/components/percent-type-provider';
+import { BooleanTypeProvider } from '../../../theme-sources/<%&themeName%>/components/boolean-type-provider';
 
 import {
   generateRows,
@@ -37,23 +40,33 @@ export default class Demo extends React.PureComponent {
       columns: [
         { name: 'product', title: 'Product' },
         { name: 'region', title: 'Region' },
+        { name: 'sector', title: 'Sector' },
+        { name: 'channel', title: 'Channel' },
         { name: 'amount', title: 'Sale Amount' },
         { name: 'discount', title: 'Discount' },
         { name: 'saleDate', title: 'Sale Date' },
         { name: 'customer', title: 'Customer' },
+        { name: 'units', title: 'Units' },
+        { name: 'shipped', title: 'Shipped' },
       ],
       tableColumnExtensions: [
         { columnName: 'amount', align: 'right' },
-        { columnName: 'discount' },
+        { columnName: 'units', align: 'right' },
       ],
       rows: generateRows({
         columnValues: { id: ({ index }) => index, ...globalSalesValues },
         length: 200000,
       }),
+      currencyColumns: ['amount'],
+      percentColumns: ['discount'],
+      booleanColumns: ['shipped'],
     };
   }
   render() {
-    const { rows, columns, tableColumnExtensions } = this.state;
+    const {
+      rows, columns, tableColumnExtensions,
+      currencyColumns, percentColumns, booleanColumns,
+    } = this.state;
 
     return (
       <<%&wrapperTag%>>
@@ -84,6 +97,10 @@ export default class Demo extends React.PureComponent {
           <IntegratedSorting />
           <IntegratedGrouping />
           <IntegratedSelection />
+
+          <CurrencyTypeProvider for={currencyColumns} />
+          <PercentTypeProvider for={percentColumns} />
+          <BooleanTypeProvider for={booleanColumns} />
 
           <VirtualTable
             columnExtensions={tableColumnExtensions}

@@ -2,6 +2,22 @@
 
 A plugin that renders the Grid toolbar.
 
+## Importing
+
+Use the following statement to import a plugin with embedded theme components:
+
+```js
+import { Toolbar } from '@devexpress/dx-react-grid-material-ui';
+// import { Toolbar } from '@devexpress/dx-react-grid-bootstrap4';
+// import { Toolbar } from '@devexpress/dx-react-grid-bootstrap3';
+```
+
+If you want to use custom components, you can import the themeless plugin:
+
+```js
+import { Toolbar } from '@devexpress/dx-react-grid';
+```
+
 ## User Reference
 
 ### Dependencies
@@ -30,7 +46,7 @@ Name | Properties | Description
 -----|------------|------------
 Toolbar.Root | [Toolbar.RootProps](#toolbarrootprops) | A component that renders the toolbar root element.
 
-If you specify additional properties, they are added to the component's root element.
+Additional properties are added to the component's root element.
 
 ## Plugin Developer Reference
 
@@ -38,10 +54,10 @@ If you specify additional properties, they are added to the component's root ele
 
 Name | Plugin | Type | Description
 -----|--------|------|------------
-header | [Template](../../../dx-react-core/docs/reference/template.md) | Object? | A template that renders the grid header.
+header | [Template](../../../dx-react-core/docs/reference/template.md) | object? | A template that renders the grid header.
 
 ### Exports
 
 Name | Plugin | Type | Description
 -----|--------|------|------------
-toolbarContent | [Template](../../../dx-react-core/docs/reference/template.md) | Object? | A template that renders the toolbar content.
+toolbarContent | [Template](../../../dx-react-core/docs/reference/template.md) | object? | A template that renders the toolbar content.

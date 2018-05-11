@@ -167,7 +167,7 @@ export default class Demo extends React.PureComponent {
     this.commitChanges = ({ added, changed, deleted }) => {
       let { rows } = this.state;
       if (added) {
-        const startingAddedId = (rows.length - 1) > 0 ? rows[rows.length - 1].id + 1 : 0;
+        const startingAddedId = rows.length > 0 ? rows[rows.length - 1].id + 1 : 0;
         rows = [
           ...rows,
           ...added.map((row, index) => ({
@@ -290,6 +290,8 @@ export default class Demo extends React.PureComponent {
               rows={rows.filter(row => deletingRows.indexOf(row.id) > -1)}
               columns={columns}
             >
+              <CurrencyTypeProvider for={currencyColumns} />
+              <PercentTypeProvider for={percentColumns} />
               <Table
                 columnExtensions={tableColumnExtensions}
                 cellComponent={Cell}

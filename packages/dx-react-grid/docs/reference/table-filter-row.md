@@ -2,6 +2,22 @@
 
 A plugin that renders a filter row.
 
+## Importing
+
+Use the following statement to import a plugin with embedded theme components:
+
+```js
+import { TableFilterRow } from '@devexpress/dx-react-grid-material-ui';
+// import { TableFilterRow } from '@devexpress/dx-react-grid-bootstrap4';
+// import { TableFilterRow } from '@devexpress/dx-react-grid-bootstrap3';
+```
+
+If you want to use custom components, you can import the themeless plugin:
+
+```js
+import { TableFilterRow } from '@devexpress/dx-react-grid';
+```
+
 ## User Reference
 
 ### Dependencies
@@ -29,8 +45,8 @@ Extends [Table.CellProps](table.md#tablecellprops)
 
 Field | Type | Description
 ------|------|------------
-filter | [Filter](filtering-state.md#filter) | Filtering options that are applied to a column.
-onFilter | (filter: [Filter](filtering-state.md#filter)) => void | An event that initiates applying a new filter to a column.
+filter | [Filter](filtering-state.md#filter) &#124; null | Filtering options that are applied to a column.
+onFilter | (filter: [Filter](filtering-state.md#filter) &#124; null) => void | An event that initiates applying a new filter to a column.
 column | [Column](grid.md#column) | A column.
 filteringEnabled | boolean | Specifies whether filtering by a column is enabled.
 getMessage | ([messageKey](#localization-messages): string) => string | Returns the filter editor placeholder text. Available in the "@devexpress/dx-react-grid-material-ui" package.
@@ -59,9 +75,10 @@ Name | Plugin | Type | Description
 tableHeaderRows | [Getter](../../../dx-react-core/docs/reference/getter.md) | Array&lt;[TableRow](table.md#tablerow)&gt; | Header rows to be rendered.
 filters | [Getter](../../../dx-react-core/docs/reference/getter.md) | Array&lt;[Filter](filtering-state.md#filter)&gt; | The filtering options.
 isColumnFilteringEnabled | [Getter](../../../dx-react-core/docs/reference/getter.md) | (columnName: string) => boolean | A function used to define if filtering by a column is enabled.
-changeColumnFilter | [Action](../../../dx-react-core/docs/reference/action.md) | ({ columnName: string, config: Object }) => void | Changes a column filter or clears it if config is null.
+changeColumnFilter | [Action](../../../dx-react-core/docs/reference/action.md) | ({ columnName: string, config: object }) => void | Changes a column's filter or clears it if config is null.
 tableCell | [Template](../../../dx-react-core/docs/reference/template.md) | [Table.CellProps](table.md#tablecellprops) | A template that renders a table cell.
 tableRow | [Template](../../../dx-react-core/docs/reference/template.md) | [Table.RowProps](table.md#tablerowprops) | A template that renders a table row.
+valueEditor | [Template](../../../dx-react-core/docs/reference/template.md) | [DataTypeProvider.ValueEditorProps](data-type-provider.md#datatypeprovidervalueeditorprops) | A template that renders the editor.
 
 ### Exports
 

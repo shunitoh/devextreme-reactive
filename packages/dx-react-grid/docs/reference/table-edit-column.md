@@ -2,6 +2,22 @@
 
 A plugin that renders a command column. This column contains controls used for row editing, creating, or deleting and committing/canceling changes.
 
+## Importing
+
+Use the following statement to import a plugin with embedded theme components:
+
+```js
+import { TableEditColumn } from '@devexpress/dx-react-grid-material-ui';
+// import { TableEditColumn } from '@devexpress/dx-react-grid-bootstrap4';
+// import { TableEditColumn } from '@devexpress/dx-react-grid-bootstrap3';
+```
+
+If you want to use custom components, you can import the themeless plugin:
+
+```js
+import { TableEditColumn } from '@devexpress/dx-react-grid';
+```
+
 ## User Reference
 
 ### Dependencies
@@ -73,7 +89,7 @@ TableEditColumn.Command | [TableEditColumn.CommandProps](#tableeditcolumncommand
 TableEditColumn.Cell | [TableEditColumn.CellProps](#tableeditcolumncellprops) | A component that renders a command cell within a data row.
 TableEditColumn.HeaderCell | [TableEditColumn.HeaderCellProps](#tableeditcolumnheadercellprops) | A component that renders a command cell within the header row.
 
-If you specify additional properties, they are added to the component's root element.
+Additional properties are added to the component's root element.
 
 ## Plugin Developer Reference
 
@@ -81,7 +97,7 @@ If you specify additional properties, they are added to the component's root ele
 
 Name | Plugin | Type | Description
 -----|--------|------|------------
-tableColumns | [Getter](../../../dx-react-core/docs/reference/getter.md)] | Array&lt;[TableColumn](table.md#tablecolumn)&gt; | Table columns.
+tableColumns | [Getter](../../../dx-react-core/docs/reference/getter.md) | Array&lt;[TableColumn](table.md#tablecolumn)&gt; | Table columns.
 addRow | [Action](../../../dx-react-core/docs/reference/action.md) | () => void | Creates a row.
 cancelAddedRows | [Action](../../../dx-react-core/docs/reference/action.md) | ({ rowIds: Array&lt;number&gt; }) => void | Removes uncommitted new rows from the `addedRows` array.
 commitAddedRows | [Action](../../../dx-react-core/docs/reference/action.md) | ({ rowIds: Array&lt;number&gt; }) => void | Fires the `onCommitChanges` event with the corresponding [ChangeSet](editing-state.md#changeset) and removes specified rows from the `addedRows` array.

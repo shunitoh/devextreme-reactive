@@ -9,15 +9,18 @@ import { Popover } from 'material-ui';
 const styles = theme => ({
   tooltipRoot: {
     display: 'block',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
   },
   sortLabelRoot: {
     height: theme.spacing.unit * 3,
+    maxWidth: '100%',
   },
   sortLabelActive: {
     color: 'inherit',
+  },
+  sortLabelText: {
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
 });
 

@@ -2,6 +2,22 @@
 
 A plugin that implements the drag-and-drop functionality and visualizes columns that are being dragged.
 
+## Importing
+
+Use the following statement to import a plugin with embedded theme components:
+
+```js
+import { DragDropProvider } from '@devexpress/dx-react-grid-material-ui';
+// import { DragDropProvider } from '@devexpress/dx-react-grid-bootstrap4';
+// import { DragDropProvider } from '@devexpress/dx-react-grid-bootstrap3';
+```
+
+If you want to use custom components, you can import the themeless plugin:
+
+```js
+import { DragDropProvider } from '@devexpress/dx-react-grid';
+```
+
 ## User Reference
 
 ### Dependencies
@@ -41,7 +57,7 @@ Name | Properties | Description
 DragDropProvider.Container | [DragDropProvider.ContainerProps](#dragdropprovidercontainerprops) | A component that renders a container for columns being dragged.
 DragDropProvider.Column | [DragDropProvider.ColumnProps](#dragdropprovidercolumnprops) | A component that renders a column being dragged.
 
-If you specify additional properties, they are added to the component's root element.
+Additional properties are added to the component's root element.
 
 ## Plugin Developer Reference
 
@@ -50,7 +66,7 @@ If you specify additional properties, they are added to the component's root ele
 Name | Plugin | Type | Description
 -----|--------|------|------------
 columns | [Getter](../../../dx-react-core/docs/reference/getter.md) | Array&lt;[Column](grid.md#column)&gt; | Columns available for dragging.
-root | [Template](../../../dx-react-core/docs/reference/template.md) | Object? | A template that renders the grid's root layout.
+root | [Template](../../../dx-react-core/docs/reference/template.md) | object? | A template that renders the grid's root layout.
 
 ### Exports
 

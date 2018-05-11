@@ -10,7 +10,9 @@ import {
 import {
   tableColumnsWithDataRows,
   tableRowsWithDataRows,
+  tableCellColSpanGetter,
   isNoDataTableRow,
+  isNoDataTableCell,
   isDataTableCell,
   isHeaderStubTableCell,
   isDataTableRow,
@@ -38,11 +40,15 @@ export class Table extends React.PureComponent {
       rowComponent: Row,
       noDataRowComponent: NoDataRow,
       noDataCellComponent: NoDataCell,
+      stubRowComponent: StubRow,
       stubCellComponent: StubCell,
       stubHeaderCellComponent: StubHeaderCell,
       columnExtensions,
-      messages, containerComponent,
-      tableComponent, headComponent, bodyComponent, fixedHeaderComponent,
+      messages,
+      containerComponent,
+      tableComponent,
+      headComponent,
+      bodyComponent,
     } = this.props;
 
     const getMessage = getMessagesFormatter(messages);
@@ -57,15 +63,20 @@ export class Table extends React.PureComponent {
         <Getter name="tableHeaderRows" value={tableHeaderRows} />
         <Getter name="tableBodyRows" computed={tableBodyRowsComputed} />
         <Getter name="tableColumns" computed={tableColumnsComputed} />
+        <Getter name="getTableCellColSpan" value={tableCellColSpanGetter} />
 
         <Template name="body">
           <TemplatePlaceholder name="table" />
         </Template>
         <Template name="table">
           <TemplateConnector>
-            {({ tableHeaderRows: headerRows, tableBodyRows: bodyRows, tableColumns: columns }) => (
+            {({
+              tableHeaderRows: headerRows,
+              tableBodyRows: bodyRows,
+              tableColumns: columns,
+              getTableCellColSpan,
+            }) => (
               <Layout
-                headTableComponent={fixedHeaderComponent}
                 tableComponent={tableComponent}
                 headComponent={headComponent}
                 bodyComponent={bodyComponent}
@@ -75,6 +86,7 @@ export class Table extends React.PureComponent {
                 columns={columns}
                 rowComponent={RowPlaceholder}
                 cellComponent={CellPlaceholder}
+                getCellColSpan={getTableCellColSpan}
               />
             )}
           </TemplateConnector>
@@ -129,7 +141,26 @@ export class Table extends React.PureComponent {
           name="tableCell"
           predicate={({ tableRow }) => isNoDataTableRow(tableRow)}
         >
-          {params => <NoDataCell {...{ getMessage, ...params }} />}
+          {params => (
+            <TemplateConnector>
+              {({ tableColumns }) => {
+                if (isNoDataTableCell(params.tableColumn, tableColumns)) {
+                  return (
+                    <NoDataCell
+                      {...params}
+                      getMessage={getMessage}
+                    />
+                  );
+                }
+                return null;
+              }}
+            </TemplateConnector>
+          )}
+        </Template>
+        <Template name="tableRow">
+          {params => (
+            <StubRow {...params} />
+          )}
         </Template>
         <Template
           name="tableRow"
@@ -163,15 +194,14 @@ Table.propTypes = {
   rowComponent: PropTypes.func.isRequired,
   noDataCellComponent: PropTypes.func.isRequired,
   noDataRowComponent: PropTypes.func.isRequired,
+  stubRowComponent: PropTypes.func.isRequired,
   stubCellComponent: PropTypes.func.isRequired,
   stubHeaderCellComponent: PropTypes.func.isRequired,
   columnExtensions: PropTypes.array,
   messages: PropTypes.object,
-  fixedHeaderComponent: PropTypes.func,
 };
 
 Table.defaultProps = {
-  fixedHeaderComponent: undefined,
   columnExtensions: undefined,
   messages: {},
 };

@@ -50,6 +50,16 @@ describe('TableHeaderCell', () => {
     expect(tree.find(`.${classes.plainTitle}`).text()).toBe('Test');
   });
 
+  it('should consider the `wordWrapEnabled` property', () => {
+    let tree = shallow(<TableHeaderCell {...defaultProps} />);
+    expect(tree.find('div').at(1).prop('className'))
+      .toContain(classes.contentNoWrap);
+
+    tree = shallow(<TableHeaderCell {...defaultProps} tableColumn={{ wordWrapEnabled: true }} />);
+    expect(tree.find('div').at(1).prop('className'))
+      .not.toContain(classes.contentNoWrap);
+  });
+
   it('should cancel sorting by using the Ctrl key', () => {
     const onSort = jest.fn();
     const tree = mount((
@@ -162,6 +172,19 @@ describe('TableHeaderCell', () => {
       .toBeTruthy();
     expect(tooltip.prop('title'))
       .toBe('sortingHint');
+  });
+
+  it('should add correct class if align is right', () => {
+    const tree = mount((
+      <TableHeaderCell
+        {...defaultProps}
+        showSortingControls
+        tableColumn={{ align: 'right' }}
+      />
+    ));
+
+    expect(tree.find(`.${classes.container} .${classes.contentRight}`).exists())
+      .toBeTruthy();
   });
 
   it('should pass the className prop to the root element', () => {
